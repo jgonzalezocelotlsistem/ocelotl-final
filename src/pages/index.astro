@@ -1,0 +1,68 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import CTA from '@/components/common/CTA.astro';
+import NavigationIslands from '@/components/home/NavigationIslands.astro'; 
+import Testimonials from '@/components/home/Testimonials.astro';// <-- 1. IMPORTAR EL NUEVO COMPONENTE
+import FeaturedNews from '@/components/home/FeaturedNews'; // <-- 1. IMPORTAR EL CARRUSEL
+import { getCollection } from 'astro:content';
+
+// 2. OBTENER LAS ÚLTIMAS 5 NOTICIAS
+const latestPosts = await getCollection('noticias', ({ data }) => {
+  return data.pubDate <= new Date();
+});
+latestPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const featuredPosts = latestPosts.slice(0, 5); // Tomamos solo las 5 más reciente
+---
+
+<Layout
+  title="Ocelotl Sistem | Construyendo Realidades Digitales"
+  description="Expertos en el desarrollo de software a la medida y soluciones de ciberseguridad para potenciar tu negocio."
+>
+ <section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+  
+  <video
+    autoplay
+    loop
+    muted
+    playsinline
+    class="absolute z-0 w-full h-full object-cover"
+  >
+    <source src="/videos/hero-background.mp4" type="video/mp4" />
+    Tu navegador no soporta el tag de video.
+  </video>
+
+    
+
+  <div class="absolute z-10 w-full h-full bg-primary opacity-60"></div>
+
+  <div class="relative z-20 max-w-6xl mx-auto px-4 text-white">
+    <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4">
+      Ciberseguridad: Protegiendo tu futuro digital.
+    </h1>
+    <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8">
+      Blindamos tu ecosistema digital con soluciones de ciberseguridad robustas y proactivas que garantizan la continuidad de tu negocio.
+    </p>
+    <a href="/seguridad" class="bg-accent text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-accent transition-colors text-lg">
+      Explora Nuestros Servicios de Seguridad
+    </a>
+  </div>
+
+</section>
+
+  <section class="py-20">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-primary mb-4">Un Enfoque Integral en Ciberseguridad</h2>
+        <p class="text-gray-600 text-lg">
+            Nuestro profundo dominio del ecosistema de amenazas y las últimas tecnologías de defensa nos permite construir una estrategia de seguridad que es no solo reactiva, sino proactiva y resiliente. Nos aseguramos de que tus operaciones críticas estén protegidas, tus datos cifrados y tu infraestructura constantemente vigilada, permitiéndote operar con total tranquilidad.
+        </p>
+    </div>
+  </section>
+<NavigationIslands />
+<Testimonials />
+  <CTA 
+    title="¿Tienes una idea o un desafío de seguridad?"
+    buttonText="Contáctanos y Hablemos"
+    buttonLink="/contacto"
+  />
+
+</Layout>

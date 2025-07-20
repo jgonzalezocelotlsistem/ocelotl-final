@@ -1,0 +1,68 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { items } from '@/data/portfolio-items';
+import PortfolioModal from '@/components/portfolio/PortfolioModal.tsx';
+
+// Nota: El componente Image de 'astro:assets' no se usa en este archivo,
+// pero es bueno tenerlo si decides añadir imágenes optimizadas aquí.
+// import { Image } from 'astro:assets'; 
+---
+
+<Layout
+  title="Portafolio | Ocelotl Sistem"
+  description="Explora nuestros proyectos y soluciones de software y ciberseguridad."
+>
+  <div class="bg-gray-50 py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-primary">Nuestro Portafolio</h1>
+        <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+          Casos de éxito que demuestran nuestra capacidad para construir realidades digitales.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {items.map(item => (
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden group">
+            <img src={item.imageUrl} alt={item.title} class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="p-6">
+              <span class="text-sm font-semibold text-secondary">{item.category}</span>
+              <h3 class="text-xl font-bold text-primary mt-2 mb-3">{item.title}</h3>
+              <p class="text-gray-600 text-sm mb-4 h-10">{item.description}</p>
+              <button
+                class="font-bold text-primary hover:text-secondary transition-colors"
+                onclick={`document.dispatchEvent(new CustomEvent('openPortfolioModal', { detail: { itemId: '${item.id}' } }))`}
+              >
+                Ver Detalles &rarr;
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <PortfolioModal client:load items={items} />
+</Layout>
+
+<script>
+  // Script para evitar el scroll del fondo cuando el modal está abierto
+  document.addEventListener('openPortfolioModal', (e) => {
+    if ((e as CustomEvent).detail.itemId) {
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  // Listener para cuando el modal se cierra
+  const modalObserver = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.removedNodes.length) {
+        if (!document.querySelector('.fixed.inset-0')) {
+          document.body.style.overflow = 'auto';
+        }
+      }
+    }
+  });
+
+  modalObserver.observe(document.body, { childList: true });
+</script>

@@ -1,0 +1,33 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('noticias');
+  return allPosts.map((post: CollectionEntry<'noticias'>) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'noticias'>;
+}
+
+const { post } = Astro.props as Props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <article class="py-20 px-4">
+    <div class="max-w-3xl mx-auto">
+      <img src={post.data.image.url} alt={post.data.image.alt} class="w-full rounded-2xl shadow-lg mb-8" />
+      <h1 class="text-4xl font-bold text-primary mb-4">{post.data.title}</h1>
+      <p class="text-gray-500 mb-8">Publicado por {post.data.author} el {post.data.pubDate.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      
+      <div class="prose prose-lg max-w-none">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>

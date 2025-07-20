@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+
+// 1. IMPORTA TU LOGO
+// Asegúrate de que esta ruta coincida con el nombre y la ubicación de tu archivo.
+import logo from '../../assets/jaguar-logo_l.svg'; 
+---
+<header class="bg-primary text-white shadow-md sticky top-0 z-50">
+  <nav class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+    
+    <a href="/" class="flex items-center space-x-3">
+      <Image src={logo} alt="Logo de Ocelotl Sistem" width={40} height={40} />
+      
+      <span class="text-2xl font-bold">Ocelotl Ciberseguridad</span>
+    </a>
+    
+    <div class="space-x-6 text-lg">
+      <a href="/" class="hover:text-accent transition-colors">Inicio</a>
+      <a href="/noticias" class="hover:text-accent transition-colors">Noticias</a>
+      <a href="/seguridad" class="hover:text-accent transition-colors">Seguridad</a>
+       <a href="/portafolio" class="hover:text-accent transition-colors">Portafolio</a> 
+      <a href="/contacto" class="hover:text-accent transition-colors">Contacto</a>
+    </div>
+
+  </nav>
+</header>

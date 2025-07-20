@@ -1,0 +1,48 @@
+---
+// La lógica para crear el enlace se queda exactamente igual.
+// Asegúrate de que tu número de teléfono aquí sea el correcto.
+const phoneNumber = "5215580107225";
+const defaultMessage = "Hola, visité su sitio web y me gustaría obtener más información.";
+const encodedMessage = encodeURIComponent(defaultMessage);
+const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+---
+
+<a
+  href={whatsappLink}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contactar por WhatsApp"
+  class="group fixed bottom-6 right-6 z-50 flex items-center"
+>
+  <div 
+    class="
+      absolute right-full mr-4 
+      px-4 py-2 
+      bg-gray-800 text-white text-sm font-semibold 
+      rounded-lg shadow-lg 
+      opacity-0 group-hover:opacity-100 
+      transition-opacity duration-300 
+      whitespace-nowrap
+    "
+  >
+    ¿Necesitas ayuda?
+  </div>
+
+  <div 
+    class="
+      w-16 h-16 bg-green-500 rounded-full shadow-lg 
+      flex items-center justify-center 
+      hover:bg-green-600 group-hover:scale-110 active:scale-95 
+      transition-all duration-300
+    "
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-9 h-9 text-white"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path d="M16.75 13.96c.25.42.18.9.18 1.02 0 .12-.06.27-.12.39-.3.54-1.05.96-1.47 1.02-.42.06-.75.33-1.2.45-1.32.3-2.34.12-3.06-.18-.72-.3-1.44-.72-2.04-1.2-1.5-1.2-2.58-2.82-2.7-3.12-.12-.3-.6-.96-.6-1.8 0-.84.39-1.26.57-1.44.18-.18.39-.24.57-.24h.24c.12 0 .24.06.39.3.15.24.48.9.54 1.02.06.12.06.24 0 .36-.12.18-.18.3-.3.42-.12.12-.24.24-.3.3-.06.06-.12.12-.12.24 0 .12.06.24.12.3.42.72 1.02 1.38 1.8 1.92.6.42 1.2.6 1.8.72.12.06.24.06.3.06h.42c.12 0 .3-.12.42-.24.12-.12.18-.24.24-.36.12-.12.24-.24.3-.42.12-.12.24-.18.36-.18.12,0 .3,0 .42.06zM12 2a10 10 0 1 0 10 10 10 10 0 0 0-10-10zm0 18.2a8.2 8.2 0 1 1 8.2-8.2 8.2 8.2 0 0 1-8.2 8.2z"></path>
+    </svg>
+  </div>
+</a>

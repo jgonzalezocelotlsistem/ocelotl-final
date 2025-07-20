@@ -1,0 +1,31 @@
+---
+// src/pages/seguridad.astro
+import Layout from '../layouts/Layout.astro';
+import SecurityHero from '../components/security/SecurityHero.astro';
+import SecurityFAQ from '../components/security/SecurityFAQ';
+import CTA from '../components/common/CTA.astro';
+import ServicesTabs from '@/components/security/ServicesTabs';
+import { services } from '@/data/security-services'
+---
+
+<Layout
+  title="Servicios de Seguridad | Ocelotl Sistem"
+  description="Protegemos tus activos digitales con servicios de ciberseguridad de vanguardia, desde pentesting hasta consultoría y monitoreo."
+  image="/images/social/seguridad-social-card.png"
+>
+  <SecurityHero />
+ 
+  
+  <div class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12 text-primary">Preguntas Frecuentes</h2>
+      <SecurityFAQ client:visible />
+    </div>
+  </div>
+<ServicesTabs client:visible services={services} />
+  <CTA 
+    title="¿Listo para fortalecer tu seguridad?"
+    buttonText="Contáctanos Ahora"
+    buttonLink="/contacto"
+  />
+</Layout>

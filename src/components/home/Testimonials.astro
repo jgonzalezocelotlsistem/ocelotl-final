@@ -1,0 +1,31 @@
+---
+const testimonials = [
+  {
+    name: 'Cliente Satisfecho 1',
+    company: 'Startup Tecnológica',
+    quote: 'El equipo de Ocelotl no solo entregó un producto robusto, sino que su enfoque en la seguridad nos dio la tranquilidad que necesitábamos para escalar.'
+  },
+  {
+    name: 'Cliente Satisfecho 2',
+    company: 'E-commerce Local',
+    quote: 'Gracias a su análisis de vulnerabilidades, pudimos cerrar brechas de seguridad críticas antes de que fueran explotadas. ¡Un servicio invaluable!'
+  }
+];
+---
+<section class="py-20">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-primary">Lo que dicen nuestros clientes</h2>
+      <p class="text-gray-600 mt-2">La confianza es el pilar de nuestra arquitectura.</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8">
+      {testimonials.map(t => (
+        <div class="bg-white p-8 rounded-2xl shadow-lg">
+          <p class="text-gray-700 italic">"{t.quote}"</p>
+          <p class="font-bold text-primary mt-6">{t.name}</p>
+          <p class="text-gray-500 text-sm">{t.company}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
